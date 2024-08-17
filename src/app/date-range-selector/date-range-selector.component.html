@@ -1,0 +1,50 @@
+<div class="col-12">
+    <div class="card w-100 py-2">
+        <nav class="nav nav-pills">
+            <button [class]="state === 1 ? 'active': ''" class="nav-link mx-1" (click)="loadData('day', 1)">Hoy</button>
+            <button [class]="state === 2 ? 'active': ''" class="nav-link mx-1" (click)="loadData('week', 2)">Esta
+                semana</button>
+            <button [class]="state === 3 ? 'active': ''" class="nav-link mx-1"
+                (click)="loadData('month', 3)">Junio</button>
+        </nav>
+    </div>
+</div>
+<!-- Filter-->
+<div class="col-12 justify-content-end d-flex mt-5">
+    <div class="dropdown">
+        <button class="btn  dropdown-toggle bg-white border" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Filtrar
+            <img src="/assets/img/sliders.svg" class="mx-2" alt="info">
+        </button>
+        <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton">
+            <li>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input mx-1" type="checkbox" id="filter1" [(ngModel)]="filters[0]">
+                    <label class="form-check-label" for="filter1">
+                        Cobro con datáfono
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input mx-1" type="checkbox" id="filter2" [(ngModel)]="filters[1]">
+                    <label class="form-check-label" for="filter2">
+                        Cobro con link de pago
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input mx-1" type="checkbox" id="filter3" [(ngModel)]="filters[3]">
+                    <label class="form-check-label" for="filter3">
+                        Ver todos
+                    </label>
+                </div>
+            </li>
+            <li class="text-center mt-2">
+                <button class="btn aply" (click)="applyFilters()">Aplicar</button>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- ./Filter-->

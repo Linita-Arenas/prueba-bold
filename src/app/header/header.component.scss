@@ -1,0 +1,33 @@
+@import 'src/styles';
+
+.header {
+  background: linear-gradient(to right, #000080, #ff0000);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    margin: 0 10px;
+  }
+
+  img {
+    margin-left: 2px;
+  }
+}

@@ -1,0 +1,51 @@
+@import 'src/styles';
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 1rem;
+  width: 100%;
+}
+
+.card {
+  margin: 1rem;
+  border-radius: 15px;
+  border: 1px solid rgba(216, 216, 216, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.deduction{
+  color:$color-red;
+  font-size: 10px;
+}
+table{
+  tr{
+    border-bottom:#F3F3F3;
+    &:nth-child(2n+1){
+      border-left: .3rem solid #121E6C;
+    }
+    &:nth-child(2n){
+      border-left: .3rem solid #F3F3F3;
+    }
+  }
+  tr.mat-mdc-header-row {
+    &:nth-child(2n+1){
+      border-left: yellow;
+    }
+  }
+  td{
+    align-items: center;
+  }
+}

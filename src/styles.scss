@@ -1,0 +1,82 @@
+/* @import '~bootstrap/scss/bootstrap'; */
+/* @import 'custom'; */
+/* @import '~bootstrap/scss/bootstrap'; */
+@import 'assets/scss/normalize.scss';
+
+$color-blue: #121E6C;
+$color-red: #EE424E;
+$color-dark-gray: #606060;
+$color-light-gray: #F3F3F3;
+$color-background: #F6F4F9;
+$color-white:#FFFFFF;
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: $color-background;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+.header {
+  background-color: #121E6C;
+  color: white;
+}
+
+.filter-button {
+  background-color: #EE424E;
+}
+
+.table-header {
+  background-color: #F3F3F3;
+}
+
+.modal {
+  background-color: #FFFFFF;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+app-dashboard {
+  flex: 1;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Estilo para el contenido
+.bg-gradient {
+  font-family: "Montserrat";
+  background: linear-gradient(to right, #000080, #ff0000) !important;
+  color: white;
+}
