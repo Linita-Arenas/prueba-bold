@@ -21,9 +21,9 @@ export class TransactionDetailModalComponent {
   // Método para obtener el texto del tipo de pago basado en el ícono
   getPaymentTypeText(): string {
     switch (this.data.icon) {
-      case '/assets/img/link-45deg.svg':
+      case '/assets/img/link.svg':
         return 'Link de Pago';
-      case '/assets/img/credit-card-2-front.svg':
+      case '/assets/img/credit.svg':
         return 'Cobro con datáfono';
       default:
         return 'Tipo de Pago Desconocido';

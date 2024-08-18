@@ -16,6 +16,7 @@ export class DateRangeSelectorComponent {
   filters = Array(3).fill(false);
   filterList: string[] = ['PAYMENT_LINK', 'TERMINAL', 'ALL'];
   dataSource = new MatTableDataSource<any>();
+  isDropdownOpen = false;
 
   constructor(private transactionsService: TransactionsService) { }
 
@@ -52,6 +53,11 @@ export class DateRangeSelectorComponent {
     this.transactionsService.filterTransactions(filterList).subscribe((response) => {
       this.dataSource.data = response;
     });
+    this.isDropdownOpen = false;
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
 

@@ -74,3 +74,36 @@
         border: none;
     }
 }
+
+.slide, .form-check-label{
+    color: $color-blue;
+}
+
+.dropdown-menu.show {
+    display: block;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem; /* Ajusta el padding según tu diseño */
+  }
+  
+  .dropdown-toggle .d-flex {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Alinea el contenido verticalmente */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho del botón */
+  }
+  
+  .dropdown-toggle span.text-center {
+    flex-grow: 1; /* Permite que el texto ocupe todo el espacio disponible */
+    text-align: center; /* Centra el texto dentro del contenedor */
+  }
+  
+  .dropdown-toggle img {
+    margin-left: 10px; /* Ajusta el espacio entre el texto y el ícono */
+  }
+  
+  

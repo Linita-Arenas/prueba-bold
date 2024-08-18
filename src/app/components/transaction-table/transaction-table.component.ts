@@ -41,10 +41,10 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   }
   readonly stateIconTransaction: any = {
     PAYMENT_LINK: {
-      icon: `link-45deg.svg`, dispname: 'Cobro con link de pago'
+      icon: `link.svg`, dispname: 'Cobro con link de pago'
     },
     TERMINAL: {
-      icon: `credit-card-2-front.svg`, dispname: 'Cobro con datáfono'
+      icon: `credit.svg`, dispname: 'Cobro con datáfono'
     },
   }
   readonly titleTableList: any = {
