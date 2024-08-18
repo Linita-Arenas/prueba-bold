@@ -6,10 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TransactionsService } from '../../helpers/services/transactions.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { TransactsInterface } from '../../helpers/services/transactions.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TransactionDetailModalComponent } from '../transaction-detail-modal/transaction-detail-modal.component';
+
 @Component({
   selector: 'app-transaction-table',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule ],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule,TransactionDetailModalComponent ],
   templateUrl: './transaction-table.component.html',
   styleUrl: './transaction-table.component.scss',
   providers: [DatePipe]
@@ -38,7 +41,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   paymentMethods:any[] = [];
   paymentMethodsIcons:any[]=[]
 
-  constructor(private transactionsService: TransactionsService, private datePipe: DatePipe) {
+  constructor(private transactionsService: TransactionsService, private datePipe: DatePipe,  private dialog: MatDialog) {
     this.transactionsService.dateSelected.subscribe({
       next: (response: any) => {
           let title =''
@@ -65,14 +68,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     this.applySelectedFilter();
   }
 
- /*  ngAfterViewInit() {
-    /* this.dataSource.paginator = this.paginator; 
-    console.log('paginador'+ this.paginator);
-    if (this.paginator) {
-      /* this.paginator.pageSize = 5; 
-      this.dataSource.paginator = this.paginator;
-    }
-  } */
 
     ngAfterViewInit() {
       if (this.dataSource.data && this.dataSource.data.length > 0) {
@@ -89,7 +84,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
           this.dataSource.data = this.transactions; 
   
           if (this.paginator) {
-            this.dataSource.paginator = this.paginator; // Configura el paginador después de obtener los datos
+            this.dataSource.paginator = this.paginator; 
           }
   
           this.paymentMethods = [
@@ -202,10 +197,10 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   }
 
   
-  getIcon(logo:any){
-    return this.paymentMethodsIcons.find(el=> el.dispname == logo)
-    /* return this.paymentMethodsIcons.find(el => el.dispname == logo)?.icon */
+  getIcon(logo: any) {
+    return this.paymentMethodsIcons.find(el => el.dispname === logo) || { icon: '/assets/img/default-icon.svg' }; // Añade un icono por defecto si no se encuentra uno
   }
+  
 
   /** Filtrar por Mes | Semana | Día */
 
@@ -259,5 +254,31 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     endOfWeek.setHours(23, 59, 59, 999);
     return endOfWeek;
   }
+
+  getTooltipText(paymentType: string): string {
+    return this.stateIconTransaction[paymentType]?.dispname || 'Tipo de pago desconocido';
+  }
+
+  openTransactionDetail(transaction: TransactsInterface): void {
+    const icon = this.getStateIconTransaction(transaction.salesType);
+    const paymentMethod = this.getPaymentMethod(transaction);
+    const paymentMethodIcon = this.getIcon(paymentMethod.text)?.icon || '';
+    
+    this.dialog.open(TransactionDetailModalComponent, {
+      width: '30%',
+      data: {
+        icon: `/assets/img/${icon.icon}`,
+        description: this.getDispnameTransaction(transaction.status),
+        amount: this.formatCurrency(transaction.amount),
+        date: this.getformattedDate(transaction.createdAt),
+        id: transaction.id,
+        deduction: transaction.deduction ? this.formatCurrency(transaction.deduction) : null,
+        paymentMethod: paymentMethod.text,
+        paymentMethodIcon: paymentMethodIcon,
+        paymentType: this.stateIconTransaction[transaction.paymentMethod]?.dispname || 'Desconocido'
+      }
+    });
+  }
+
 
 }

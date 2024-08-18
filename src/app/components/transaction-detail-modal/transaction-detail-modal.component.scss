@@ -1,0 +1,150 @@
+@import 'src/styles';
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+.modal-content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100vh;
+    background-color: #fff;
+    border-radius: 10px 0 0 10px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.result {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.amount {
+    font-size: 1.7rem;
+    color: $color-blue;
+    text-align: center;
+    font-weight: bold;
+}
+
+.date {
+    text-align: center;
+}
+
+.details {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.transaction-id {
+    font-weight: bold;
+}
+
+.deduction {
+    font-size: 0.8rem;
+    color: $color-red;
+    font-weight: 800;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.text-only p img {
+    margin-left: 8px;
+}
+
+
+.text-only p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.text-only p span.details {
+    flex: 1;
+    text-align: left;
+}
+
+.right-aligned {
+    flex: 1;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.right-aligned img {
+    margin-left: 8px;
+}
+
+.tp {
+    font-weight: 800;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background-color: $color-dark-gray;
+}
+
+.info, .text-only {
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Centra el contenido del modal */
+}
+
+/* Media Query para pantallas medianas */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 80%;
+        max-width: 90vw;
+        border-radius: 5px;
+    }
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 90%;
+        max-width: 95vw;
+        border-radius: 0;
+    }
+}

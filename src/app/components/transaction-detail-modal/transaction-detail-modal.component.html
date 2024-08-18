@@ -1,0 +1,50 @@
+<mat-dialog-content>
+    <div class="modal-content">
+        <img src="assets/img/icon-x.svg" alt="Cerrar" class="close-btn" (click)="onClose()">
+        <div class="row">
+            <div class="col text-only">
+                <div class="mt-5 info">
+                    <p>
+                        <img [src]="data.description === 'Cobro exitoso' ? 'assets/img/icon-correct.svg' : 'assets/img/icon-error.svg'"
+                            alt="Icono Transacción">
+                    </p>
+                    <p class="result">¡{{data.description}}!</p>
+                    <p class="amount">{{data.amount}}</p>
+                    <p class="date">{{data.date}}</p>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <span class="details">ID Transacción Bold:</span>
+                        <span class="transaction-id right-aligned">{{data.id}}</span>
+                    </p>
+                    <p *ngIf="data.deduction">
+                        <span class="details">Deducción Bold:</span>
+                        <span class="deduction right-aligned">-{{data.deduction}}</span>
+                    </p>
+                </div>
+                <hr>
+                <div>
+                    <p>
+                        <span class="details">Método de Pago:</span>
+                        <span class="right-aligned">
+                            <img [src]="data.paymentMethodIcon" alt="Icono Método de Pago" class="icon mx-1">
+                            {{data.paymentMethod}}
+                        </span>
+                    </p>
+                    <p>
+                        <span class="details">Tipo de Pago:</span>
+                        <span class="right-aligned tp">
+                            <img [src]="data.icon" alt="Icono Transacción" class="mx-2">
+                            <ng-container *ngIf="data.icon === '/assets/img/link-45deg.svg'">
+                                {{ getPaymentTypeText() }}
+                            </ng-container>
+                            <ng-container *ngIf="data.icon === '/assets/img/credit-card-2-front.svg'">
+                                Cobro con datáfono
+                            </ng-container>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

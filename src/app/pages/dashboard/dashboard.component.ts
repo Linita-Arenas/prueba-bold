@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TransactionTableComponent } from '../../components/transaction-table/transaction-table.component';
-import { FilterModalComponent } from '../../filter-modal/filter-modal.component';
 import { CardComponent } from '../../components/card/card.component';
 import { TransactionsService } from '../../helpers/services/transactions.service';
 import { DateRangeSelectorComponent } from '../../components/date-range-selector/date-range-selector.component';
+import { TransactionDetailModalComponent } from '../../components/transaction-detail-modal/transaction-detail-modal.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [TransactionTableComponent, FilterModalComponent, CardComponent, DateRangeSelectorComponent],
+  imports: [TransactionTableComponent, TransactionDetailModalComponent, CardComponent, DateRangeSelectorComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
