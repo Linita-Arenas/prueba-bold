@@ -1,11 +1,11 @@
 <div class="col-12">
     <div class="card w-100 py-2">
         <nav class="nav nav-pills">
-            <button [class]="state === 1 ? 'active': ''" class="nav-link mx-1" (click)="loadData('day', 1)">Hoy</button>
+            <button [class]="state === 1 ? 'active': ''" class="nav-link mx-1" (click)="loadData('day', 1)" (change)=" applyFilters()">Hoy</button>
             <button [class]="state === 2 ? 'active': ''" class="nav-link mx-1" (click)="loadData('week', 2)">Esta
                 semana</button>
             <button [class]="state === 3 ? 'active': ''" class="nav-link mx-1"
-                (click)="loadData('month', 3)">Junio</button>
+                (click)="loadData('month', 3)">Agosto</button>
         </nav>
     </div>
 </div>

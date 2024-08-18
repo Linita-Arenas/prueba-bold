@@ -9,7 +9,7 @@ body {
 .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que la altura mínima sea igual a la altura de la ventana */
+    min-height: 100vh;
 }
 :host {
     display: flex;

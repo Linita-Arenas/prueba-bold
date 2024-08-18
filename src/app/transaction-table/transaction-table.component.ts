@@ -1,24 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TransactionsService } from '../helpers/services/transactions.service';
-import { MatPaginator } from '@angular/material/paginator';
-
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { TransactsInterface } from '../helpers/services/transactions.service';
 @Component({
   selector: 'app-transaction-table',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule,MatPaginator],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule ],
   templateUrl: './transaction-table.component.html',
   styleUrl: './transaction-table.component.scss',
   providers: [DatePipe]
 })
-export class TransactionTableComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
-  transactions: any[] = [];
-  dataSource: any;
+export class TransactionTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+ /*  @ViewChild(MatPaginator) paginator?: MatPaginator; */
+ transactions: TransactsInterface[][] = [];
+  dataSource = new MatTableDataSource<TransactsInterface[]>();
   isLoading: boolean = false;
   titleTable:string='day';
   readonly displayedColumns: string[] = ['status', 'createdAt', 'paymentMethod', 'id', 'amount'];
@@ -53,46 +53,88 @@ export class TransactionTableComponent implements OnInit {
             }
           })
         }
-        this.titleTable = title
+        this.titleTable = title;
+        this.applySelectedFilter();
         //this.filterTransactions(this.dataSource, response)
       }
     })
   }
 
   ngOnInit() {
-    this.getTransactions()
+    this.getTransactions();
+    this.applySelectedFilter();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+ /*  ngAfterViewInit() {
+    /* this.dataSource.paginator = this.paginator; 
+    console.log('paginador'+ this.paginator);
+    if (this.paginator) {
+      /* this.paginator.pageSize = 5; 
+      this.dataSource.paginator = this.paginator;
+    }
+  } */
 
-  getTransactions() {
-    this.isLoading = true;
-    this.transactionsService.getTransactions().subscribe({
-      next: (response) => {
-      this.transactions = Array.isArray(response.data) ? response.data : [];
-        this.dataSource = new MatTableDataSource(response.data)
-        this.paymentMethods = [...new Set(response.data.map((item:any) =>{
-          if ( item.franchise) {
-            return item.franchise
-          }else{
-            return item.paymentMethod
+    ngAfterViewInit() {
+      if (this.dataSource.data && this.dataSource.data.length > 0) {
+        this.dataSource.paginator = this.paginator;
+      }
+      
+    }
+
+    getTransactions() {
+      this.isLoading = true;
+      this.transactionsService.getTransactions().subscribe({
+        next: (response) => {
+          this.transactions = Array.isArray(response.data) ? response.data : [];
+          this.dataSource.data = this.transactions; 
+  
+          if (this.paginator) {
+            this.dataSource.paginator = this.paginator; // Configura el paginador después de obtener los datos
           }
-        }))]
-        console.log(this.paymentMethods)
-      },
-      complete: () => {
-        this.isLoading = false;
-        this.loadIcons()
-      },
-      error: (err) => { },
-    })
-  }
+  
+          this.paymentMethods = [
+            ...new Set(
+              this.transactions.map((item: any) => 
+                item.franchise ? item.franchise : item.paymentMethod
+              )
+            )
+          ];
+          console.log(this.paymentMethods)
+        },
+        complete: () => {
+          this.isLoading = false;
+          this.loadIcons();
+        },
+        error: (err) => { 
+          this.isLoading = false;
+        },
+      })
+    }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  // Nuevas funciones para aplicar filtros
+  applyFilters(filterList: any[]) {
+    console.log('Filtros aplicados:', filterList);
+    this.transactionsService.filterTransactions(filterList).subscribe((response) => {
+      this.dataSource.data = response;
+    });
+  }
+
+  // Cargar el estado de los filtros desde localStorage
+  loadFilters() {
+    const savedFilters = localStorage.getItem('filters');
+    if (savedFilters) {
+      const filters = JSON.parse(savedFilters);
+      this.applyFilters(filters);
+    }
   }
 
   getformattedDate(date: string): string {
@@ -104,7 +146,7 @@ export class TransactionTableComponent implements OnInit {
     if (element.paymentMethod === 'CARD')
       return { icon: `${element.franchise}`, text: `${element.franchise} ****${element.transactionReference}` }
     else
-      return { icon: `${element.paymentMethod}`, text: `${element.paymentMethod}` }
+      return { icon: `${element.paymentMethod}`, text: `${element.paymentMethod}` };
   }
 
   getStateIconTransaction(element: any) {
@@ -133,29 +175,36 @@ export class TransactionTableComponent implements OnInit {
       case 'month':
         return this.filterByMonth(transactions, date);
       default:
-        return [];
+        /* return []; */
+        return transactions;
     }
     this.applySelectedFilter()
   }
 
   applySelectedFilter() {
     let filteredTransactions = this.filterTransactions(this.transactions, this.titleTable);
-    this.dataSource = new MatTableDataSource(filteredTransactions);
+    /* this.dataSource = new MatTableDataSource(filteredTransactions); */
+    this.dataSource.data = filteredTransactions;
+
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator; // Asegura que el paginador esté configurado después de filtrar
+    }
   }
 
   loadIcons(){
     this.paymentMethods.map(logo=>{
       this.transactionsService.getLogo(logo).subscribe({
         next:(response)=>{
-          this.paymentMethodsIcons.push({dispname:logo, icon:response[0].icon})
+          this.paymentMethodsIcons.push({dispname:logo, icon:response[0].icon});
         }
-      })
-    })
+      });
+    });
   }
 
   
   getIcon(logo:any){
     return this.paymentMethodsIcons.find(el=> el.dispname == logo)
+    /* return this.paymentMethodsIcons.find(el => el.dispname == logo)?.icon */
   }
 
   /** Filtrar por Mes | Semana | Día */

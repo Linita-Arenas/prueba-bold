@@ -1,7 +1,17 @@
 @import 'src/styles';
 
+table th, table td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: $color-white;
+  border-collapse: collapse;
+}
+
 table {
   width: 100%;
+
+  td{
+    color:$color-blue;
+  }
 }
 
 .mat-mdc-form-field {
@@ -11,24 +21,27 @@ table {
 
 .card {
   margin: 1rem;
-  border-radius: 15px;
+  border-radius: 15px 15px 0px 0px;
   border: 1px solid rgba(216, 216, 216, 0.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  text-align: center;
+.common-text-styles {
+  font-size: 12px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
-.deduction{
-  color:$color-red;
-  font-size: 10px;
+.deduction {
+  @extend .common-text-styles;
+  color: $color-dark-gray;
+}
+
+.montoDeduction {
+  @extend .common-text-styles;
+  color: $color-red;
 }
 table{
   tr{
@@ -48,4 +61,18 @@ table{
   td{
     align-items: center;
   }
+}
+
+.transaction-table-container {
+  margin: 20px;
+}
+
+.mat-elevation-z8.table.table-striped.white-bg-table {
+  max-height: 400px; /* Ajusta según tus necesidades */
+  overflow-y: auto;
+}
+
+
+mat-paginator {
+  margin-top: 10px;
 }
