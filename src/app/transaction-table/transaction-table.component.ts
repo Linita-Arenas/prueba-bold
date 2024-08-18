@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TransactionsService } from '../helpers/services/transactions.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { TransactsInterface } from '../helpers/services/transactions.service';
+import { StorageService } from '../helpers/services/storage.service';
 @Component({
   selector: 'app-transaction-table',
   standalone: true,
@@ -16,11 +17,14 @@ import { TransactsInterface } from '../helpers/services/transactions.service';
 })
 export class TransactionTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
- /*  @ViewChild(MatPaginator) paginator?: MatPaginator; */
- transactions: TransactsInterface[][] = [];
+  transactions: TransactsInterface[][] = [];
   dataSource = new MatTableDataSource<TransactsInterface[]>();
+  dataSourceStorage: any = [];
   isLoading: boolean = false;
-  titleTable:string='day';
+  titleTable: string = 'month';
+  paymentMethods: any[] = [];
+  paymentMethodsIcons: any[] = []
+
   readonly displayedColumns: string[] = ['status', 'createdAt', 'paymentMethod', 'id', 'amount'];
   readonly stateTransaction: any = {
     REJECTED: 'Cobro no realizado',
@@ -34,22 +38,23 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       icon: `credit-card-2-front.svg`, dispname: 'Cobro con datáfono'
     },
   }
-  readonly titleTableList: any = {day: 'de hoy', week:'de esta semana', month:'de este mes', PAYMENT_LINK: 'con cobro con link',TERMINAL: 'con cobro con datáfono' }
-  paymentMethods:any[] = [];
-  paymentMethodsIcons:any[]=[]
+  readonly titleTableList: any = {
+    day: 'de hoy', week: 'de esta semana', month: 'de este mes',
+    PAYMENT_LINK: 'con cobro con link', TERMINAL: 'con cobro con datáfono'
+  }
 
-  constructor(private transactionsService: TransactionsService, private datePipe: DatePipe) {
-    this.transactionsService.dateSelected.subscribe({
+  constructor(private transactionsService: TransactionsService, private datePipe: DatePipe, private storageService: StorageService) {
+    this.transactionsService.dateSelected$.subscribe({
       next: (response: any) => {
-          let title =''
+        let title = ''
         if (typeof response === 'string') {
-          this.titleTable=response
-        }else{
-          response.map((el:any, idx:any) =>{
-            if (idx== 0) {
+          title = response
+        } else {
+          response.map((el: any, idx: any) => {
+            if (idx == 0) {
               title = this.titleTableList[el]
-            }else if (idx != 0){
-              title = title +' y '+ this.titleTableList[el]
+            } else if (idx != 0) {
+              title = title + ' y ' + this.titleTableList[el]
             }
           })
         }
@@ -59,12 +64,22 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       }
     })
   }
-
+  
   ngOnInit() {
-    this.getTransactions();
+    const storedData = this.storageService.getItemParse('bold-services');    
+    if (storedData) {
+      try {
+        this.dataSource = new MatTableDataSource<TransactsInterface[]>(JSON.parse(storedData));
+        this.loadDataStorage();
+      } catch (e) {
+        console.error('Error parsing JSON from localStorage:', e);
+        this.getTransactions();
+      }
+    } else {
+      this.getTransactions();
+    }  
     this.applySelectedFilter();
   }
-
  /*  ngAfterViewInit() {
     /* this.dataSource.paginator = this.paginator; 
     console.log('paginador'+ this.paginator);
@@ -86,20 +101,10 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       this.transactionsService.getTransactions().subscribe({
         next: (response) => {
           this.transactions = Array.isArray(response.data) ? response.data : [];
-          this.dataSource.data = this.transactions; 
-  
-          if (this.paginator) {
-            this.dataSource.paginator = this.paginator; // Configura el paginador después de obtener los datos
-          }
-  
-          this.paymentMethods = [
-            ...new Set(
-              this.transactions.map((item: any) => 
-                item.franchise ? item.franchise : item.paymentMethod
-              )
-            )
-          ];
-          console.log(this.paymentMethods)
+          this.dataSource.data = this.transactions;
+          this.storageService.setItem('bold-services', JSON.stringify(this.dataSource.data))
+          this.setupPaginator();
+          this.setupPaymentMethods();
         },
         complete: () => {
           this.isLoading = false;
@@ -111,30 +116,43 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       })
     }
 
+  setupPaginator() {
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
+  }
+  
+  setupPaymentMethods() {
+    this.paymentMethods = [
+      ...new Set(
+        this.transactions.map((item: any) =>
+          item.franchise ? item.franchise : item.paymentMethod
+        )
+      )
+    ];
+    console.log(this.paymentMethods);
+  }
+
+  loadDataStorage() {
+    this.dataSource.data = JSON.parse(this.storageService.getItem('bold-services') || '[]');
+    this.setupPaginator();
+    this.setupPaymentMethods();
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
-  // Nuevas funciones para aplicar filtros
+  // To do - Nuevas funciones para aplicar filtros 
   applyFilters(filterList: any[]) {
     console.log('Filtros aplicados:', filterList);
     this.transactionsService.filterTransactions(filterList).subscribe((response) => {
       this.dataSource.data = response;
     });
-  }
-
-  // Cargar el estado de los filtros desde localStorage
-  loadFilters() {
-    const savedFilters = localStorage.getItem('filters');
-    if (savedFilters) {
-      const filters = JSON.parse(savedFilters);
-      this.applyFilters(filters);
-    }
   }
 
   getformattedDate(date: string): string {
@@ -178,14 +196,11 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
         /* return []; */
         return transactions;
     }
-    this.applySelectedFilter()
   }
 
   applySelectedFilter() {
     let filteredTransactions = this.filterTransactions(this.transactions, this.titleTable);
-    /* this.dataSource = new MatTableDataSource(filteredTransactions); */
-    this.dataSource.data = filteredTransactions;
-
+    this.dataSource = new MatTableDataSource<TransactsInterface[]>(filteredTransactions);
     if (this.paginator) {
       this.dataSource.paginator = this.paginator; // Asegura que el paginador esté configurado después de filtrar
     }

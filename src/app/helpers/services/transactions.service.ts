@@ -20,7 +20,7 @@ export interface TransactsInterface {
 })
 export class TransactionsService {
 
-  dateSelected = new BehaviorSubject('day');
+  dateSelected$ = new BehaviorSubject('month');
   private apiUrl = 'https://bold-fe-api.vercel.app/api'; 
 
   constructor(private http: HttpClient) { }
@@ -33,7 +33,7 @@ export class TransactionsService {
     return this.http.get<any>(`https://api.brandfetch.io/v2/search/${logo}?limit=1`);
   }
   changesDateSelected(state: any): void {
-    this.dateSelected.next(state);
+    this.dateSelected$.next(state);
   }
   filterTransactions(filterList: string[]): Observable<any> {
     let params = new HttpParams();
