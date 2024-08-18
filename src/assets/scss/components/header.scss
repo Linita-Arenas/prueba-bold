@@ -1,0 +1,18 @@
+.header {
+    background: linear-gradient(to right, #000080, #ff0000);
+    color: $color-white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .logo {
+    width: 150px;
+    height: auto;
+  }
+  

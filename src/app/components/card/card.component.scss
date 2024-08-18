@@ -3,12 +3,12 @@
 .card-header {
     background: linear-gradient(to right, #000080, #ff0000);
     font-family: "Montserrat";
-    color: $color-background ;
+    color: $color-background;
     font-size: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 15px 15px 0px 0px;
+    border-radius: 15px 15px 0 0;
 }
 
 .card-title {

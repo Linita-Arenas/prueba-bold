@@ -1,0 +1,23 @@
+@media (max-width: 767px) {
+    .dashboard-container {
+        padding-top: 25%;
+    }
+}
+
+@media (max-width: 950px) {
+
+    .description,
+    .text-only {
+        display: none;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col.icon-only {
+        flex: 0 0 auto;
+    }
+}

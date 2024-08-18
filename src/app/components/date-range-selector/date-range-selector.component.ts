@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TransactionsService } from '../helpers/services/transactions.service';
+import { TransactionsService } from '../../helpers/services/transactions.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';

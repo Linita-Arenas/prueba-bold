@@ -1,5 +1,5 @@
-
 @import 'src/styles';
+
 html,
 body {
     height: 100%;
@@ -11,9 +11,9 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 :host {
     display: flex;
     flex-direction: column;
     height: 100%;
-  }
-  
+}

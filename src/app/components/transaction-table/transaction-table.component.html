@@ -24,8 +24,8 @@
           @let icon = getStateIconTransaction(element.salesType);
           @let typeTransaction = getDispnameTransaction(element.status);
           <div class="row">
-            <div class="col-2"><img [src]="'/assets/img/'+icon['icon']" alt="" data-bs-toggle="tooltip" data-bs-placement="top" [attr.title]="icon['dispname']"></div>
-            <div class="col">{{typeTransaction}}</div>
+            <div class="col-2 icon-only"><img [src]="'/assets/img/'+icon['icon']" alt="" data-bs-toggle="tooltip" data-bs-placement="top" [attr.title]="icon['dispname']"></div>
+            <div class="col text-only">{{typeTransaction}}</div>
           </div>
         </td>
       </ng-container>
@@ -43,12 +43,12 @@
           @let paymentMethod = getPaymentMethod(element);
           @let paymentIcon = getIcon(paymentMethod['text']);
           <div class="row align-content-center">
-            <div class="col-2">
+            <div class="col-2 icon-only">
               @if (paymentIcon) {
                 <img [src]="paymentIcon['icon']" alt="" width="30rem" height="30rem">
               }
             </div>
-            <div class="col pl-4"><p class="p-0 m-0">{{paymentMethod['text']}}</p></div>
+            <div class="col pl-4 description"><p class="p-0 m-0">{{paymentMethod['text']}}</p></div>
           </div>
         </td>
       </ng-container>

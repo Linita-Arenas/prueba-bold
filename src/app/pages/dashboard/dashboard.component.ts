@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { TransactionTableComponent } from '../transaction-table/transaction-table.component';
-import { FilterModalComponent } from '../filter-modal/filter-modal.component';
-import { CardComponent } from '../card/card.component';
-import { TransactionsService } from '../helpers/services/transactions.service';
-import { DateRangeSelectorComponent } from '../date-range-selector/date-range-selector.component';
+import { TransactionTableComponent } from '../../components/transaction-table/transaction-table.component';
+import { FilterModalComponent } from '../../filter-modal/filter-modal.component';
+import { CardComponent } from '../../components/card/card.component';
+import { TransactionsService } from '../../helpers/services/transactions.service';
+import { DateRangeSelectorComponent } from '../../components/date-range-selector/date-range-selector.component';
 
 @Component({
   selector: 'app-dashboard',

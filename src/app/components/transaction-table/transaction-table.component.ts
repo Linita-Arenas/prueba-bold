@@ -3,9 +3,9 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TransactionsService } from '../helpers/services/transactions.service';
+import { TransactionsService } from '../../helpers/services/transactions.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { TransactsInterface } from '../helpers/services/transactions.service';
+import { TransactsInterface } from '../../helpers/services/transactions.service';
 @Component({
   selector: 'app-transaction-table',
   standalone: true,

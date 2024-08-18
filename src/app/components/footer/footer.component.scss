@@ -1,0 +1,53 @@
+@import 'src/styles';
+
+footer {
+    background: linear-gradient(to right, #000080, #ff0000);
+    color: $color-white;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+img {
+    width: 100px;
+    height: auto;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+}
+
+.info p {
+    margin: 0;
+    margin-right: 5px;
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-left: 3px solid $color-white;
+    font-size: 16px;
+}
+
+.info-item:last-child {
+    border-right: none;
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TransactionTableComponent } from './transaction-table/transaction-table.component';
+import { TransactionTableComponent } from './components/transaction-table/transaction-table.component';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 
 export const routes: Routes = [
