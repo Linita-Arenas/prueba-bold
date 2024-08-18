@@ -27,6 +27,11 @@ export class DataSharingService {
     this.titleTableListSource.next(titleList);
   }
 
+  setTotalAmount(amount: number) {
+    console.log('setTotalAmount:', amount);
+    this.totalAmountSource.next(amount);
+  }
+
   getTitleTable() {
     return this.titleTableSource.getValue();
   }
@@ -34,8 +39,5 @@ export class DataSharingService {
   getTitleTableList() {
     return this.titleTableListSource.getValue();
   }
-  setTotalAmount(amount: number) {
-    console.log('setTotalAmount:', amount);
-    this.totalAmountSource.next(amount);
-  }
+ 
 }

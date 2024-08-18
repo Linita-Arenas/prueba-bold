@@ -32,4 +32,21 @@ export class CardComponent implements OnInit {
   getTableTitle(): string {
     return this.titleTableList[this.titleTable] || '';
   }
+
+  formatCurrency(value: number): string {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 0
+    }).format(value);
+  }
+
+  getFormattedDate(): string {
+    const now = new Date();
+    return now.toLocaleDateString('es-CO', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
 }

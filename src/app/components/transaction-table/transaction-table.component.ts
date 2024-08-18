@@ -4,7 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TransactionsService } from '../../helpers/services/transactions.service';
-import { DataSharingService  } from '../../helpers/services/data-sharing.service';
+import { DataSharingService } from '../../helpers/services/data-sharing.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { TransactsInterface } from '../../helpers/services/transactions.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,12 +14,12 @@ import { StorageService } from '../../helpers/services/storage.service';
 @Component({
   selector: 'app-transaction-table',
   standalone: true,
-  imports: [CommonModule, 
-            MatFormFieldModule, 
-            MatInputModule, 
-            MatTableModule, 
-            MatPaginatorModule,
-            TransactionDetailModalComponent ],
+  imports: [CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    TransactionDetailModalComponent],
   templateUrl: './transaction-table.component.html',
   styleUrl: './transaction-table.component.scss',
   providers: [DatePipe]
@@ -53,10 +53,10 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private transactionsService: TransactionsService, 
+    private transactionsService: TransactionsService,
     private datePipe: DatePipe,
-    private storageService: StorageService, 
-    private dialog: MatDialog,  
+    private storageService: StorageService,
+    private dialog: MatDialog,
     private dataSharingService: DataSharingService
   ) {
     this.transactionsService.dateSelected$.subscribe({
@@ -76,14 +76,14 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
         this.titleTable = title;
         this.applySelectedFilter();
         //this.filterTransactions(this.dataSource, response)
-         this.dataSharingService.setTitleTable(this.titleTable);
-    this.dataSharingService.setTitleTableList(this.titleTableList);
+        this.dataSharingService.setTitleTable(this.titleTable);
+        this.dataSharingService.setTitleTableList(this.titleTableList);
       }
     })
   }
-  
+
   ngOnInit() {
-    const storedData = this.storageService.getItemParse('bold-services');    
+    const storedData = this.storageService.getItemParse('bold-services');
     if (storedData) {
       try {
         this.dataSource = new MatTableDataSource<TransactsInterface[]>(JSON.parse(storedData));
@@ -94,60 +94,60 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       }
     } else {
       this.getTransactions();
-    }  
+    }
     this.applySelectedFilter();
     this.dataSharingService.setTitleTable(this.titleTable);
     this.dataSharingService.setTitleTableList(this.titleTableList);
-    
+
   }
 
-    ngAfterViewInit() {
-      if (this.dataSource.data && this.dataSource.data.length > 0) {
-        this.dataSource.paginator = this.paginator;
-      }
-      
+  ngAfterViewInit() {
+    if (this.dataSource.data && this.dataSource.data.length > 0) {
+      this.dataSource.paginator = this.paginator;
     }
 
-    getTransactions() {
-      this.isLoading = true;
-      this.transactionsService.getTransactions().subscribe({
-        next: (response) => {
-          this.transactions = Array.isArray(response.data) ? response.data : [];
-          this.dataSource.data = this.transactions; 
-  
-          if (this.paginator) {
-            this.dataSource.paginator = this.paginator; 
-          }
-  
-          this.paymentMethods = [
-            ...new Set(
-              this.transactions.map((item: any) => 
-                item.franchise ? item.franchise : item.paymentMethod
-              )
+  }
+
+  getTransactions() {
+    this.isLoading = true;
+    this.transactionsService.getTransactions().subscribe({
+      next: (response) => {
+        this.transactions = Array.isArray(response.data) ? response.data : [];
+        this.dataSource.data = this.transactions;
+
+        if (this.paginator) {
+          this.dataSource.paginator = this.paginator;
+        }
+
+        this.paymentMethods = [
+          ...new Set(
+            this.transactions.map((item: any) =>
+              item.franchise ? item.franchise : item.paymentMethod
             )
-          ];
-          console.log(this.paymentMethods)
-          this.dataSource.data = this.transactions;
-          this.storageService.setItem('bold-services', JSON.stringify(this.dataSource.data))
-          this.setupPaginator();
-          this.setupPaymentMethods();
-        },
-        complete: () => {
-          this.isLoading = false;
-          this.loadIcons();
-        },
-        error: (err) => { 
-          this.isLoading = false;
-        },
-      })
-    }
+          )
+        ];
+        console.log(this.paymentMethods)
+        this.dataSource.data = this.transactions;
+        this.storageService.setItem('bold-services', JSON.stringify(this.dataSource.data))
+        this.setupPaginator();
+        this.setupPaymentMethods();
+      },
+      complete: () => {
+        this.isLoading = false;
+        this.loadIcons();
+      },
+      error: (err) => {
+        this.isLoading = false;
+      },
+    })
+  }
 
   setupPaginator() {
     if (this.paginator) {
       this.dataSource.paginator = this.paginator;
     }
   }
-  
+
   setupPaymentMethods() {
     this.paymentMethods = [
       ...new Set(
@@ -228,25 +228,32 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     let filteredTransactions = this.filterTransactions(this.transactions, this.titleTable);
     this.dataSource = new MatTableDataSource<TransactsInterface[]>(filteredTransactions);
     if (this.paginator) {
-      this.dataSource.paginator = this.paginator; // Asegura que el paginador esté configurado después de filtrar
+      this.dataSource.paginator = this.paginator;
     }
+
+    const totalAmount = this.calculateTotalAmount(filteredTransactions);
+    this.dataSharingService.setTotalAmount(totalAmount);
   }
 
-  loadIcons(){
-    this.paymentMethods.map(logo=>{
+  calculateTotalAmount(transactions: TransactsInterface[]): number {
+    return transactions.reduce((total, transaction) => total + transaction.amount, 0);
+  }
+
+  loadIcons() {
+    this.paymentMethods.map(logo => {
       this.transactionsService.getLogo(logo).subscribe({
-        next:(response)=>{
-          this.paymentMethodsIcons.push({dispname:logo, icon:response[0].icon});
+        next: (response) => {
+          this.paymentMethodsIcons.push({ dispname: logo, icon: response[0].icon });
         }
       });
     });
   }
 
-  
+
   getIcon(logo: any) {
     return this.paymentMethodsIcons.find(el => el.dispname === logo) || { icon: '/assets/img/default-icon.svg' }; // Añade un icono por defecto si no se encuentra uno
   }
-  
+
 
   /** Filtrar por Mes | Semana | Día */
 
@@ -309,7 +316,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     const icon = this.getStateIconTransaction(transaction.salesType);
     const paymentMethod = this.getPaymentMethod(transaction);
     const paymentMethodIcon = this.getIcon(paymentMethod.text)?.icon || '';
-    
+
     this.dialog.open(TransactionDetailModalComponent, {
       width: '30%',
       data: {
