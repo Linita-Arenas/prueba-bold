@@ -13,7 +13,7 @@ body {
     background-color: #fff;
     border-radius: 10px 0 0 10px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-    padding: 20px;
+    padding: 50px;
     overflow-y: auto;
     z-index: 1000;
     display: flex;
@@ -128,7 +128,7 @@ hr {
 .info, .text-only {
     margin: 0;
     padding: 0;
-    text-align: center; /* Centra el contenido del modal */
+    text-align: center; 
 }
 
 /* Media Query para pantallas medianas */

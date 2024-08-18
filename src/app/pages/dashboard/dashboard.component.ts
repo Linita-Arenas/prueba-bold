@@ -14,7 +14,8 @@ import { TransactionDetailModalComponent } from '../../components/transaction-de
 })
 export class DashboardComponent {
   period = 'Junio';
-  state:number = 0
+  state:number = 0;
+  someValue: number = 100;
   @Output() dateSelected: EventEmitter<any> = new EventEmitter();
 
   constructor(private transactionsService:TransactionsService){}

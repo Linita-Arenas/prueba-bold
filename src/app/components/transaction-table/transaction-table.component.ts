@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TransactionsService } from '../../helpers/services/transactions.service';
+import { DataSharingService  } from '../../helpers/services/data-sharing.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { TransactsInterface } from '../../helpers/services/transactions.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +14,12 @@ import { StorageService } from '../../helpers/services/storage.service';
 @Component({
   selector: 'app-transaction-table',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule,TransactionDetailModalComponent ],
+  imports: [CommonModule, 
+            MatFormFieldModule, 
+            MatInputModule, 
+            MatTableModule, 
+            MatPaginatorModule,
+            TransactionDetailModalComponent ],
   templateUrl: './transaction-table.component.html',
   styleUrl: './transaction-table.component.scss',
   providers: [DatePipe]
@@ -26,7 +32,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   isLoading: boolean = false;
   titleTable: string = 'month';
   paymentMethods: any[] = [];
-  paymentMethodsIcons: any[] = []
+  paymentMethodsIcons: { dispname: string, icon: string }[] = [];
 
   readonly displayedColumns: string[] = ['status', 'createdAt', 'paymentMethod', 'id', 'amount'];
   readonly stateTransaction: any = {
@@ -46,7 +52,13 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     PAYMENT_LINK: 'con cobro con link', TERMINAL: 'con cobro con datáfono'
   }
 
-  constructor(private transactionsService: TransactionsService, private datePipe: DatePipe, private storageService: StorageService, private dialog: MatDialog) {
+  constructor(
+    private transactionsService: TransactionsService, 
+    private datePipe: DatePipe,
+    private storageService: StorageService, 
+    private dialog: MatDialog,  
+    private dataSharingService: DataSharingService
+  ) {
     this.transactionsService.dateSelected$.subscribe({
       next: (response: any) => {
         let title = ''
@@ -64,6 +76,8 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
         this.titleTable = title;
         this.applySelectedFilter();
         //this.filterTransactions(this.dataSource, response)
+         this.dataSharingService.setTitleTable(this.titleTable);
+    this.dataSharingService.setTitleTableList(this.titleTableList);
       }
     })
   }
@@ -82,6 +96,9 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       this.getTransactions();
     }  
     this.applySelectedFilter();
+    this.dataSharingService.setTitleTable(this.titleTable);
+    this.dataSharingService.setTitleTableList(this.titleTableList);
+    
   }
 
     ngAfterViewInit() {
