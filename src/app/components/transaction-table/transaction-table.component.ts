@@ -185,13 +185,21 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     const dateFormat = new Date(date);
     return this.datePipe.transform(dateFormat, 'dd/MM/yyyy - HH:mm:ss') || '';
   }
-
+     
   getPaymentMethod(element: any) {
-    if (element.paymentMethod === 'CARD')
-      return { icon: `${element.franchise}`, text: `${element.franchise} ****${element.transactionReference}` }
-    else
-      return { icon: `${element.paymentMethod}`, text: `${element.paymentMethod}` };
-  }
+    if (element.paymentMethod === 'CARD') {
+        return {
+            icon: element.franchise,
+            text: element.franchise,
+            transactionReference: element.transactionReference
+        };
+    } else {
+        return {
+            icon: element.paymentMethod,
+            text: element.paymentMethod
+        };
+    }
+}
 
   getStateIconTransaction(element: any) {
     return this.stateIconTransaction[element] || 'null';
