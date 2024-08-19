@@ -1,27 +1,63 @@
+
 # AngularProjectBold
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+## Tabla de Contenidos
+- [Introducción](#introducción)
+- [Características](#características)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Despliegue](## Despliegue)
+- [Aplicación](## Aplicación en producción)
+- [Contacto](#contacto)
 
-## Development server
+## Introducción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Este proyecto Angular tiene como objetivo principal crear un dashboard para la visualización y gestión de transacciones. Incluye funcionalidades para listar transacciones, aplicar filtros por fecha y tipo, y realizar búsquedas generales en la tabla. También se ha implementado un diseño responsive utilizando la fuente Montserrat.
 
-## Code scaffolding
+## Características
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Listado de transacciones con detalles.
+- Filtros por fecha y tipo de transacción.
+- Búsqueda general en la tabla de transacciones.
+- Diseño responsive con soporte para múltiples dispositivos.
+- Integración con un backend para obtener datos de transacciones.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalación
 
-## Running unit tests
+Para instalar y ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/Linita-Arenas/prueba-bold.git
 
-## Running end-to-end tests
+2. Navega al directorio del proyecto:
+    bash
+    cd prueba-bold
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Dependencias
+    npm install
 
-## Further help
+4. Inicia el servidor de desarrollo
+    ng serve
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+5. Abre tu navegador y visita 
+    http://localhost:4200/transactions
+
+## Uso
+
+Una vez que el servidor de desarrollo esté corriendo, puedes acceder a la aplicación a través de `http://localhost:4200/transactions`. Utiliza la barra de búsqueda para encontrar transacciones específicas y los filtros para ajustar los resultados mostrados.
+
+## Despliegue
+Este proyecto está desplegado y accesible en línea en la siguiente URL:
+ `https://bold-prueba-lina-arenas.netlify.app/transactions`
+
+## Aplicación
+El código fuente del proyecto está alojado en GitHub:
+`https://github.com/Linita-Arenas/prueba-bold`
+
+## Contacto
+
+Puedes contactarme a través de [lmarenasa@outlook.com](lmarenasa@outlook.comm) o en [Linkedin](https://www.linkedin.com/in/linamariaarenas/).
+
+

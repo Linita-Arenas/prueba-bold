@@ -3,55 +3,49 @@
 body {
     margin: 0;
     padding: 0;
-}
+  }
 
 .modal-content {
     position: fixed;
     top: 0;
     right: 0;
-    width: 60%;
+    width: 40%;
     height: 100vh;
-    max-height: 800px;
     background-color: #fff;
     border-radius: 10px 0 0 10px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-    padding: 5%;
+    padding: 50px;
     overflow-y: auto;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 24px;
-    height: 24px;
     background-color: transparent;
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
 }
 
-.result,
-.amount,
-.date,
-.details,
-.transaction-id,
-.deduction {
-    text-align: center;
-}
-
 .result {
     font-size: 1.2rem;
     font-weight: bold;
+    text-align: center;
 }
 
 .amount {
     font-size: 1.7rem;
     color: $color-blue;
+    text-align: center;
     font-weight: bold;
+}
+
+.date {
+    text-align: center;
 }
 
 .details {
@@ -76,27 +70,29 @@ body {
     vertical-align: middle;
 }
 
-.info,
-.text-only {
-    margin: 0;
-    padding: 0;
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
+
+.text-only p img {
+    margin-left: 8px;
+}
+
 
 .text-only p {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0;
-
-    span.details {
-        flex: 1;
-        text-align: left;
-    }
 }
 
-.text-only p img {
-    margin-left: 8px;
+.text-only p span.details {
+    flex: 1;
+    text-align: left;
 }
 
 .right-aligned {
@@ -105,14 +101,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
 
-    img {
-        margin-left: 8px;
-    }
+.right-aligned img {
+    margin-left: 8px;
 }
 
 .tp {
     font-weight: 800;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
 hr {
@@ -120,6 +125,13 @@ hr {
     height: 2px;
     background-color: $color-dark-gray;
 }
+
+.info, .text-only {
+    margin: 0;
+    padding: 0;
+    text-align: center; 
+}
+
 
 @media (max-width: 768px) {
     .modal-content {

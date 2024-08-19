@@ -176,6 +176,8 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   applyFilters(filterList: any[]) {
     this.transactionsService.filterTransactions(filterList).subscribe((response) => {
       this.dataSource.data = response;
+      const totalAmount = this.calculateTotalAmount(response);
+    this.dataSharingService.setTotalAmount(totalAmount)
     });
   }
 
