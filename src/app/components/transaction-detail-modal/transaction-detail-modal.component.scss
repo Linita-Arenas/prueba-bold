@@ -4,21 +4,22 @@ body {
     padding: 0;
   }
 
-.modal-content {
+  .modal-content {
     position: fixed;
     top: 0;
     right: 0;
-    width: 40%;
+    width: 90%;
     height: 100vh;
+    max-height: 800px;
     background-color: #fff;
     border-radius: 10px 0 0 10px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-    padding: 50px;
+    padding: 5%;
     overflow-y: auto;
-    z-index: 1000;
     display: flex;
     flex-direction: column;
-}
+    justify-content: center;
+  }
 
 .close-btn {
     position: absolute;
@@ -129,22 +130,4 @@ hr {
     margin: 0;
     padding: 0;
     text-align: center; 
-}
-
-/* Media Query para pantallas medianas */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 80%;
-        max-width: 90vw;
-        border-radius: 5px;
-    }
-}
-
-/* Media Query para pantallas pequeñas */
-@media (max-width: 480px) {
-    .modal-content {
-        width: 90%;
-        max-width: 95vw;
-        border-radius: 0;
-    }
 }
