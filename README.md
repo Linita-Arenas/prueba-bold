@@ -33,7 +33,7 @@ Para instalar y ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
 2. Navega al directorio del proyecto:
     bash
-    cd prueba-bold
+    cd angular-project-bold
 
 3. Dependencias
     npm install
