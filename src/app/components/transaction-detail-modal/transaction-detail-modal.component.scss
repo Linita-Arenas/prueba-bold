@@ -26,27 +26,32 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
+    width: 24px;
+    height: 24px;
     background-color: transparent;
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
 }
 
+.result,
+.amount,
+.date,
+.details,
+.transaction-id,
+.deduction {
+    text-align: center;
+}
+
 .result {
     font-size: 1.2rem;
     font-weight: bold;
-    text-align: center;
 }
 
 .amount {
     font-size: 1.7rem;
     color: $color-blue;
-    text-align: center;
     font-weight: bold;
-}
-
-.date {
-    text-align: center;
 }
 
 .details {
@@ -71,29 +76,27 @@ body {
     vertical-align: middle;
 }
 
-.info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.info,
+.text-only {
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
-
-.text-only p img {
-    margin-left: 8px;
-}
-
 
 .text-only p {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0;
+
+    span.details {
+        flex: 1;
+        text-align: left;
+    }
 }
 
-.text-only p span.details {
-    flex: 1;
-    text-align: left;
+.text-only p img {
+    margin-left: 8px;
 }
 
 .right-aligned {
@@ -102,36 +105,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
 
-.right-aligned img {
-    margin-left: 8px;
+    img {
+        margin-left: 8px;
+    }
 }
 
 .tp {
     font-weight: 800;
 }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
-
 hr {
     border: 0;
     height: 2px;
     background-color: $color-dark-gray;
-}
-
-.info,
-.text-only {
-    margin: 0;
-    padding: 0;
-    text-align: center;
 }
 
 @media (max-width: 768px) {

@@ -1,19 +1,18 @@
 @import 'src/styles';
 
 .dashboard-container {
-    padding-top: 10%;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: $color-background;
-  }
-  
-  .dashboard-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .dashboard-title {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-  
+  padding-top: 10%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: $color-background;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-title {
+  font-size: 2em;
+  margin-bottom: 10px;
+}

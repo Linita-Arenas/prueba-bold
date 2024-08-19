@@ -11,35 +11,43 @@
   border-radius: 15px 15px 0 0;
 }
 
-table th,
-table td {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: $color-white;
-  border-collapse: collapse;
-}
-
+// Estilos de la tabla
 table {
   width: 100%;
   overflow-x: auto;
+  border-collapse: collapse;
 
-  td {
+  th, td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: $color-white;
     color: $color-blue;
+    text-align: center;
   }
-}
 
-.mat-mdc-form-field {
-  font-size: 1rem;
-  width: 100%;
+  tr {
+    &:nth-child(2n+1) {
+      border-left: .3rem solid #121E6C;
+    }
+
+    &:nth-child(2n) {
+      border-left: .3rem solid #F3F3F3;
+    }
+  }
+
+  tr.mat-mdc-header-row {
+    &:nth-child(2n+1) {
+      border-left: yellow;
+    }
+  }
 }
 
 .card {
   margin: 1rem;
-  border-radius: 15px 15px 0px 0px;
+  border-radius: 15px;
   border: 1px solid rgba(216, 216, 216, 0.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
-
 
 .common-text-styles {
   font-size: 12px;
@@ -58,40 +66,21 @@ table {
   color: $color-red;
 }
 
-table {
-  tr {
-    border-bottom: #F3F3F3;
-
-    &:nth-child(2n+1) {
-      border-left: .3rem solid #121E6C;
-    }
-
-    &:nth-child(2n) {
-      border-left: .3rem solid #F3F3F3;
-    }
-  }
-
-  tr.mat-mdc-header-row {
-    &:nth-child(2n+1) {
-      border-left: yellow;
-    }
-  }
-
-  td {
-    align-items: center;
-  }
-}
-
 .transaction-table-container {
   margin: 20px;
 }
+
 
 .mat-elevation-z8.table.table-striped.white-bg-table {
   max-height: 400px;
   overflow-y: auto;
 }
 
-
 mat-paginator {
   margin-top: 10px;
+}
+
+.mat-mdc-form-field {
+  font-size: 1rem;
+  width: 100%;
 }

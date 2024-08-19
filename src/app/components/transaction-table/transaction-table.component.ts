@@ -128,7 +128,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
             )
           )
         ];
-        console.log(this.paymentMethods)
         this.dataSource.data = this.transactions;
         this.storageService.setItem('bold-services', JSON.stringify(this.dataSource.data))
         this.setupPaginator();
@@ -158,7 +157,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
         )
       )
     ];
-    console.log(this.paymentMethods);
   }
 
   loadDataStorage() {
@@ -175,9 +173,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // To do - Nuevas funciones para aplicar filtros 
   applyFilters(filterList: any[]) {
-    console.log('Filtros aplicados:', filterList);
     this.transactionsService.filterTransactions(filterList).subscribe((response) => {
       this.dataSource.data = response;
     });
@@ -221,7 +217,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
 
   filterTransactions(transactions: any[], filterType: string): any[] {
     const date: Date = new Date();
-    console.log(transactions)
     switch (filterType) {
       case 'day':
         return this.filterByDay(transactions, date);
@@ -268,8 +263,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource<TransactsInterface[]>(dataFilter);
   }
   /** Filtrar por Mes | Semana | Día */
-
-  // Filtrar transacciones por día.
   private filterByDay(transactions: any[], date: Date): any[] {
     return transactions.filter((transaction) => {
       const transactionDate = new Date(transaction.createdAt);
@@ -281,7 +274,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Filtrar transacciones por semana.
   private filterByWeek(transactions: any[], date: Date): any[] {
     const startOfWeek = this.getStartOfWeek(date);
     const endOfWeek = this.getEndOfWeek(date);
@@ -291,7 +283,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Filtrar transacciones por mes.
   private filterByMonth(transactions: any[], date: Date): any[] {
     return transactions.filter((transaction) => {
       const transactionDate = new Date(transaction.createdAt);
@@ -302,7 +293,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Obtener el inicio de la semana para una fecha dada.
   private getStartOfWeek(date: Date): Date {
     const day = date.getDay();
     const startOfWeek = new Date(date);
@@ -311,7 +301,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     return startOfWeek;
   }
 
-  // Obtener el final de la semana para una fecha dada.
+
   private getEndOfWeek(date: Date): Date {
     const day = date.getDay();
     const endOfWeek = new Date(date);
@@ -344,6 +334,4 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-
 }

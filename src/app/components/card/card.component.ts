@@ -25,7 +25,6 @@ export class CardComponent implements OnInit {
 
     this.dataSharingService.totalAmount$.subscribe(totalAmount => {
       this.totalAmount = totalAmount;
-      console.log('Recibido totalAmount en CardComponent:', this.totalAmount);
     });
 
   }

@@ -28,7 +28,6 @@ export class DataSharingService {
   }
 
   setTotalAmount(amount: number) {
-    console.log('setTotalAmount:', amount);
     this.totalAmountSource.next(amount);
   }
 

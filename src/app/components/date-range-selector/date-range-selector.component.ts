@@ -38,12 +38,10 @@ export class DateRangeSelectorComponent {
   }
 
   applyFilters() {
-    console.log('Filtros aplicados:', this.filters);
     let filterList: string[] = [];
     this.filters.forEach((el, idx) => {
       if (el) filterList.push(this.filterList[idx]);
     });
-    console.log(filterList);
     localStorage.setItem('filters', JSON.stringify(this.filters));
 
     this.transactionsService.changesDateSelected(filterList);
