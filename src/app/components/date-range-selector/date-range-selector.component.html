@@ -22,7 +22,7 @@
         <ul class="dropdown-menu p-3" [ngClass]="{'show': isDropdownOpen}" aria-labelledby="dropdownMenuButton">
           <li>
             <div class="form-check d-flex align-items-center">
-              <input class="form-check-input mx-1" type="checkbox" id="filter1" [(ngModel)]="filters[0]" (change)="applyFilters()">
+              <input class="form-check-input mx-1" type="checkbox" id="filter1" [(ngModel)]="filters[0]">
               <label class="form-check-label" for="filter1">
                 Cobro con datáfono
               </label>
@@ -30,7 +30,7 @@
           </li>
           <li>
             <div class="form-check d-flex align-items-center">
-              <input class="form-check-input mx-1" type="checkbox" id="filter2" [(ngModel)]="filters[1]" (change)="applyFilters()">
+              <input class="form-check-input mx-1" type="checkbox" id="filter2" [(ngModel)]="filters[1]">
               <label class="form-check-label" for="filter2">
                 Cobro con link de pago
               </label>
@@ -38,7 +38,7 @@
           </li>
           <li>
             <div class="form-check d-flex align-items-center">
-              <input class="form-check-input mx-1" type="checkbox" id="filter3" [(ngModel)]="filters[2]" (change)="applyFilters()">
+              <input class="form-check-input mx-1" type="checkbox" id="filter3" [(ngModel)]="filters[2]">
               <label class="form-check-label" for="filter3">
                 Ver todos
               </label>

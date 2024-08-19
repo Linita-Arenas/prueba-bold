@@ -1,7 +1,7 @@
 @if (!isLoading) {
   <div class="card w-100 mb-5">
     <div class="card-header">
-      Tus ventas {{titleTableList[titleTable]}}
+      Tus ventas {{titleTableList[titleTable] || this.titleTable}}
     </div>
     <div class="input-group input-group-lg">
       <span class="input-group-text bg-white border-0" id="search-addon">

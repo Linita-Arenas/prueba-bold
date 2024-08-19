@@ -49,10 +49,10 @@ export class DateRangeSelectorComponent {
     // Guardar el estado de los filtros en localStorage
     localStorage.setItem('filters', JSON.stringify(this.filters));
 
-    /* this.transactionsService.changesDateSelected(filterList); */
-    this.transactionsService.filterTransactions(filterList).subscribe((response) => {
+    this.transactionsService.changesDateSelected(filterList);
+    /* this.transactionsService.filterTransactions(filterList).subscribe((response) => {
       this.dataSource.data = response;
-    });
+    }); */
     this.isDropdownOpen = false;
   }
 
