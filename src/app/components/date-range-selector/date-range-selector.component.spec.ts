@@ -10,7 +10,7 @@ describe('DateRangeSelectorComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DateRangeSelectorComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DateRangeSelectorComponent);
     component = fixture.componentInstance;

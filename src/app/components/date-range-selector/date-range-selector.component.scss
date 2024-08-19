@@ -1,20 +1,17 @@
 @import 'src/styles';
 
-// Filtros de tablero
 .dashboard-filters {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-// Contenido del tablero
 .dashboard-content {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-// Navegación
 .nav {
     display: flex;
     width: 100%;
@@ -26,7 +23,6 @@
     text-align: center;
 }
 
-// Estilos para las pestañas de navegación
 .nav-pills .nav-link {
     color: $color-blue;
     background-color: $color-background;
@@ -37,9 +33,8 @@
     border: 1px solid rgba(216, 216, 216, 0.349);
 }
 
-// Estilos para las pestañas activas
 .nav-pills .nav-link.active {
-    color: $color-blue; // Asegúrate de definir esta variable
+    color: $color-blue;
     background-color: #e2dede;
     border-radius: 50px;
 }
@@ -57,15 +52,16 @@
     font-size: 1rem;
 }
 
-// Estilos para el dropdown
 .dropdown {
     li {
         font-size: 0.8rem;
     }
-    button.dropdown-toggle, 
+
+    button.dropdown-toggle,
     ul {
         width: 15rem;
     }
+
     .dropdown-toggle::after {
         display: inline-block;
         margin-left: 0.255em;
@@ -75,35 +71,34 @@
     }
 }
 
-.slide, .form-check-label{
+.slide,
+.form-check-label {
     color: $color-blue;
 }
 
 .dropdown-menu.show {
     display: block;
-  }
+}
 
-  .dropdown-toggle {
+.dropdown-toggle {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 0.5rem 1rem; /* Ajusta el padding según tu diseño */
-  }
-  
-  .dropdown-toggle .d-flex {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-toggle .d-flex {
     display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Alinea el contenido verticalmente */
-    width: 100%; /* Asegura que el contenedor ocupe todo el ancho del botón */
-  }
-  
-  .dropdown-toggle span.text-center {
-    flex-grow: 1; /* Permite que el texto ocupe todo el espacio disponible */
-    text-align: center; /* Centra el texto dentro del contenedor */
-  }
-  
-  .dropdown-toggle img {
-    margin-left: 10px; /* Ajusta el espacio entre el texto y el ícono */
-  }
-  
-  
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.dropdown-toggle span.text-center {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.dropdown-toggle img {
+    margin-left: 10px;
+}

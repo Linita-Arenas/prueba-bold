@@ -12,7 +12,7 @@ export class CardComponent implements OnInit {
   titleTableList: any = {};
   totalAmount: number = 0;
 
-  constructor(private dataSharingService: DataSharingService) {}
+  constructor(private dataSharingService: DataSharingService) { }
 
   ngOnInit() {
     this.dataSharingService.titleTable$.subscribe(title => {

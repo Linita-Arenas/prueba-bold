@@ -39,5 +39,5 @@ export class DataSharingService {
   getTitleTableList() {
     return this.titleTableListSource.getValue();
   }
- 
+
 }

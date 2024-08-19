@@ -33,7 +33,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   titleTable: string = 'month';
   paymentMethods: any[] = [];
   paymentMethodsIcons: { dispname: string, icon: string }[] = [];
-
+  listTypeFilter:any[]=[]
   readonly displayedColumns: string[] = ['status', 'createdAt', 'paymentMethod', 'id', 'amount'];
   readonly stateTransaction: any = {
     REJECTED: 'Cobro no realizado',
@@ -62,19 +62,22 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     this.transactionsService.dateSelected$.subscribe({
       next: (response: any) => {
         let title = ''
+        this.listTypeFilter=[]
         if (typeof response === 'string') {
           title = response
+          this.applySelectedFilter();
         } else {
           response.map((el: any, idx: any) => {
+            this.listTypeFilter.push(el)
             if (idx == 0) {
               title = this.titleTableList[el]
             } else if (idx != 0) {
               title = title + ' y ' + this.titleTableList[el]
             }
           })
+          this.filterTypeTransaction(this.transactions, this.listTypeFilter)
         }
         this.titleTable = title;
-        this.applySelectedFilter();
         //this.filterTransactions(this.dataSource, response)
         this.dataSharingService.setTitleTable(this.titleTable);
         this.dataSharingService.setTitleTableList(this.titleTableList);
@@ -98,7 +101,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     this.applySelectedFilter();
     this.dataSharingService.setTitleTable(this.titleTable);
     this.dataSharingService.setTitleTableList(this.titleTableList);
-
   }
 
   ngAfterViewInit() {
@@ -185,7 +187,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     const dateFormat = new Date(date);
     return this.datePipe.transform(dateFormat, 'dd/MM/yyyy - HH:mm:ss') || '';
   }
-     
+
   getPaymentMethod(element: any) {
     if (element.paymentMethod === 'CARD') {
         return {
@@ -219,6 +221,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
 
   filterTransactions(transactions: any[], filterType: string): any[] {
     const date: Date = new Date();
+    console.log(transactions)
     switch (filterType) {
       case 'day':
         return this.filterByDay(transactions, date);
@@ -227,7 +230,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       case 'month':
         return this.filterByMonth(transactions, date);
       default:
-        /* return []; */
         return transactions;
     }
   }
@@ -257,12 +259,14 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   getIcon(logo: any) {
     return this.paymentMethodsIcons.find(el => el.dispname === logo) || { icon: '/assets/img/default-icon.svg' }; // Añade un icono por defecto si no se encuentra uno
   }
 
-
+  filterTypeTransaction(transactions: any[], salesTypes: string[]){
+    let dataFilter =  transactions.filter(transaction => salesTypes.includes(transaction.salesType));
+    this.dataSource = new MatTableDataSource<TransactsInterface[]>(dataFilter);
+  }
   /** Filtrar por Mes | Semana | Día */
 
   // Filtrar transacciones por día.

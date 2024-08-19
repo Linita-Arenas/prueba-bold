@@ -1,56 +1,56 @@
 <div class="col-12">
     <div class="card w-100 py-2">
-      <nav class="nav nav-pills">
-        <button [class.active]="state === 1" class="nav-link mx-1" (click)="loadData('day', 1)">Hoy</button>
-        <button [class.active]="state === 2" class="nav-link mx-1" (click)="loadData('week', 2)">Esta semana</button>
-        <button [class.active]="state === 3" class="nav-link mx-1" (click)="loadData('month', 3)">Agosto</button>
-      </nav>
+        <nav class="nav nav-pills">
+            <button [class.active]="state === 1" class="nav-link mx-1" (click)="loadData('day', 1)">Hoy</button>
+            <button [class.active]="state === 2" class="nav-link mx-1" (click)="loadData('week', 2)">Esta
+                semana</button>
+            <button [class.active]="state === 3" class="nav-link mx-1" (click)="loadData('month', 3)">Agosto</button>
+        </nav>
     </div>
-  </div>
-  
-  <!-- Filter -->
-  <div class="col-12 justify-content-end d-flex mt-5">
+</div>
+
+<!-- Filter -->
+<div class="col-12 justify-content-end d-flex mt-5">
     <div class="dropdown">
-        <button class="btn dropdown-toggle bg-white border slide" type="button" id="dropdownMenuButton" (click)="toggleDropdown()">
-          <div class="d-flex justify-content-between align-items-center w-100">
-            <span class="text-center flex-grow-1">Filtrar</span>
-            <span class="icon-wrapper mx-2">
-              <img [src]="isDropdownOpen ? '/assets/img/x-lg.svg' : '/assets/img/sliders.svg'" class="mx-2" alt="info">
-            </span>
-          </div>
+        <button class="btn dropdown-toggle bg-white border slide" type="button" id="dropdownMenuButton"
+            (click)="toggleDropdown()">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <span class="text-center flex-grow-1">Filtrar</span>
+                <span class="icon-wrapper mx-2">
+                    <img [src]="isDropdownOpen ? '/assets/img/x-lg.svg' : '/assets/img/sliders.svg'" class="mx-2"
+                        alt="info">
+                </span>
+            </div>
         </button>
         <ul class="dropdown-menu p-3" [ngClass]="{'show': isDropdownOpen}" aria-labelledby="dropdownMenuButton">
-          <li>
-            <div class="form-check d-flex align-items-center">
-              <input class="form-check-input mx-1" type="checkbox" id="filter1" [(ngModel)]="filters[0]" (change)="applyFilters()">
-              <label class="form-check-label" for="filter1">
-                Cobro con datáfono
-              </label>
-            </div>
-          </li>
-          <li>
-            <div class="form-check d-flex align-items-center">
-              <input class="form-check-input mx-1" type="checkbox" id="filter2" [(ngModel)]="filters[1]" (change)="applyFilters()">
-              <label class="form-check-label" for="filter2">
-                Cobro con link de pago
-              </label>
-            </div>
-          </li>
-          <li>
-            <div class="form-check d-flex align-items-center">
-              <input class="form-check-input mx-1" type="checkbox" id="filter3" [(ngModel)]="filters[2]" (change)="applyFilters()">
-              <label class="form-check-label" for="filter3">
-                Ver todos
-              </label>
-            </div>
-          </li>
-          <li class="text-center mt-2">
-            <button class="btn apply" (click)="applyFilters()">Aplicar</button>
-          </li>
+            <li>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input mx-1" type="checkbox" id="filter1" [(ngModel)]="filters[0]">
+                    <label class="form-check-label" for="filter1">
+                        Cobro con datáfono
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input mx-1" type="checkbox" id="filter2" [(ngModel)]="filters[1]">
+                    <label class="form-check-label" for="filter2">
+                        Cobro con link de pago
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input mx-1" type="checkbox" id="filter3" [(ngModel)]="filters[2]">
+                    <label class="form-check-label" for="filter3">
+                        Ver todos
+                    </label>
+                </div>
+            </li>
+            <li class="text-center mt-2">
+                <button class="btn apply" (click)="applyFilters()">Aplicar</button>
+            </li>
         </ul>
-      </div>
-  </div>
-  <!-- ./Filter -->
-  
-
-  
+    </div>
+</div>
+<!-- ./Filter -->

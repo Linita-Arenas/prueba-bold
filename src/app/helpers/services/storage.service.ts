@@ -7,21 +7,21 @@ export class StorageService {
 
   constructor() { }
 
-  getItemParse(key: string): any  {
+  getItemParse(key: string): any {
     if (this.isBrowser()) {
       return JSON.parse(String(localStorage.getItem(key)));
     }
     return {};
   }
 
-  getItem(key: string): any  {
+  getItem(key: string): any {
     if (this.isBrowser()) {
       return (String(localStorage.getItem(key)));
     }
     return '';
   }
 
-  getItemString(key: string): any  {
+  getItemString(key: string): any {
     if (this.isBrowser()) {
       return (String(localStorage.getItem(key)));
     }
@@ -34,13 +34,13 @@ export class StorageService {
     }
   }
 
-  removeItem(key:string):void{
+  removeItem(key: string): void {
     if (this.isBrowser()) {
       localStorage.removeItem(key)
     }
   }
 
-  cleanItems():void{
+  cleanItems(): void {
     if (this.isBrowser()) {
       localStorage.clear()
     }

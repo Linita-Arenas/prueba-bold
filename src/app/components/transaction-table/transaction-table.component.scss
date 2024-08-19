@@ -11,7 +11,8 @@
   border-radius: 15px 15px 0 0;
 }
 
-table th, table td {
+table th,
+table td {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background-color: $color-white;
   border-collapse: collapse;
@@ -21,8 +22,8 @@ table {
   width: 100%;
   overflow-x: auto;
 
-  td{
-    color:$color-blue;
+  td {
+    color: $color-blue;
   }
 }
 
@@ -56,22 +57,27 @@ table {
   @extend .common-text-styles;
   color: $color-red;
 }
-table{
-  tr{
-    border-bottom:#F3F3F3;
-    &:nth-child(2n+1){
+
+table {
+  tr {
+    border-bottom: #F3F3F3;
+
+    &:nth-child(2n+1) {
       border-left: .3rem solid #121E6C;
     }
-    &:nth-child(2n){
+
+    &:nth-child(2n) {
       border-left: .3rem solid #F3F3F3;
     }
   }
+
   tr.mat-mdc-header-row {
-    &:nth-child(2n+1){
+    &:nth-child(2n+1) {
       border-left: yellow;
     }
   }
-  td{
+
+  td {
     align-items: center;
   }
 }
@@ -81,7 +87,7 @@ table{
 }
 
 .mat-elevation-z8.table.table-striped.white-bg-table {
-  max-height: 400px; 
+  max-height: 400px;
   overflow-y: auto;
 }
 
@@ -89,4 +95,3 @@ table{
 mat-paginator {
   margin-top: 10px;
 }
-

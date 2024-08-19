@@ -15,10 +15,9 @@ export class TransactionDetailModalComponent {
     public dialogRef: MatDialogRef<TransactionDetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-/*     console.log('Datos del modal:', data); */
+
   }
 
-  // Método para obtener el texto del tipo de pago basado en el ícono
   getPaymentTypeText(): string {
     switch (this.data.icon) {
       case '/assets/img/link.svg':

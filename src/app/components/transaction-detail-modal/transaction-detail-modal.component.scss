@@ -1,14 +1,15 @@
 @import 'src/styles';
+
 body {
     margin: 0;
     padding: 0;
-  }
+}
 
-  .modal-content {
+.modal-content {
     position: fixed;
     top: 0;
     right: 0;
-    width: 90%;
+    width: 60%;
     height: 100vh;
     max-height: 800px;
     background-color: #fff;
@@ -19,7 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
+}
 
 .close-btn {
     position: absolute;
@@ -126,8 +127,33 @@ hr {
     background-color: $color-dark-gray;
 }
 
-.info, .text-only {
+.info,
+.text-only {
     margin: 0;
     padding: 0;
-    text-align: center; 
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: calc(100% - 10px);
+        max-width: 400px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: calc(100% - 5px);
+        max-width: 300px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .modal-content {
+        width: 100%;
+        max-width: 200px;
+        padding: 5px;
+    }
 }

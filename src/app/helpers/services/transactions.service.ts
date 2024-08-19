@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject  } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface TransactsInterface {
@@ -9,10 +9,10 @@ export interface TransactsInterface {
   paymentMethod: string;
   id: number;
   amount: number;
-  salesType?:	string;
-  transactionReference?:	number;
-  deduction?:	number;
-  franchise?:	string;
+  salesType?: string;
+  transactionReference?: number;
+  deduction?: number;
+  franchise?: string;
 }
 
 @Injectable({
@@ -21,7 +21,7 @@ export interface TransactsInterface {
 export class TransactionsService {
 
   dateSelected$ = new BehaviorSubject('month');
-  private apiUrl = 'https://bold-fe-api.vercel.app/api'; 
+  private apiUrl = 'https://bold-fe-api.vercel.app/api';
 
   constructor(private http: HttpClient) { }
 
@@ -42,6 +42,6 @@ export class TransactionsService {
     });
     return this.http.get<any>(this.apiUrl, { params });
   }
-   
-  
+
+
 }

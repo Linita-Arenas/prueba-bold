@@ -22,8 +22,7 @@ export class DateRangeSelectorComponent {
 
   ngOnInit() {
     this.state = 3;
-    this.loadData('month', this.state); // Carga los datos para "Agosto" al iniciar el componente.
-    // Cargar el estado de los filtros desde localStorage
+    this.loadData('month', this.state);
     this.applyFilters();
     const savedFilters = localStorage.getItem('filters');
     if (savedFilters) {
@@ -45,14 +44,9 @@ export class DateRangeSelectorComponent {
       if (el) filterList.push(this.filterList[idx]);
     });
     console.log(filterList);
-
-    // Guardar el estado de los filtros en localStorage
     localStorage.setItem('filters', JSON.stringify(this.filters));
 
-    /* this.transactionsService.changesDateSelected(filterList); */
-    this.transactionsService.filterTransactions(filterList).subscribe((response) => {
-      this.dataSource.data = response;
-    });
+    this.transactionsService.changesDateSelected(filterList);
     this.isDropdownOpen = false;
   }
 
